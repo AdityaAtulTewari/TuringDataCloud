@@ -9,25 +9,26 @@
 typedef char bool;
 #define true 0x5FFF
 #define false 0x0000
+typedef struct rbTreeNode rbNode;
 
-typedef struct rbTreeNode
+struct rbTreeNode
 {
   char      color;
   void*     data;
   rbNode*   left;
   rbNode*   right;
-} rbNode;
+};
 
-struct rbTree
+typedef struct rbTree
 {
   rbNode*   root;
-}
+} rbTree;
 
 //Constructs a node assigns it's children to 0 and sets the color to 'r' (red)
-rbNode createRBNode(void* data);
+rbNode* createRBNode(void* data);
 
-//Destroys a node returning it's data
-void* destructRBNode();
+//Destroys a node and all of it's children
+void destructRBNode(rbNode* node, void (*destruct)(void*));
 
 //Construct an empty rbTree
 rbTree* createRBTree();
@@ -42,7 +43,7 @@ rbNode* insertRBNode(rbNode* target, rbTree* tree, int (*compare)(void*, void*))
 rbNode* deleteRBNode(rbNode* target, rbTree* tree, int (*compare)(void*, void*));
 
 //Finds a node in the tree
-bool findRBNode(rbNode* target, rbTree* tree, int(*compare)(void*, void*));
+bool findRBNode(void* data, rbTree* tree, int (*compare)(void*, void*));
 
 
 
