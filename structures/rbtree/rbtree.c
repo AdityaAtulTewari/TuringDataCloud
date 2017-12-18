@@ -38,6 +38,17 @@ void destructRBTree(rbTree* tree, void (*destruct)(void *))
   free(tree);
 }
 
+
+//this function is only safe when called within the findRBNode
+bool hfindRBNode(void* data, rbNode* node, int (*compare)(void*, void*))
+{
+  int c = compare(data, node->data);
+  if(node == NULL) return false;
+  if(c == 0) return true;
+  else if(c < 0) return hfindRBNode(data, node->left, compare);
+  else return hfindRBNode(data, node->right, compare);
+}
+
 bool findRBNode(void* data, rbTree* tree, int (*compare)(void*, void*))
 {
   if(data == NULL) return false;
@@ -46,15 +57,7 @@ bool findRBNode(void* data, rbTree* tree, int (*compare)(void*, void*))
   if(tree->root == NULL) return false;
   int c = compare(data, tree->root->data);
   if(c == 0) return true;
-  else if(c < 0) return hfindRBNode(data, tree->left, compare);
-  else return hfindRBNode(data, tree->right, compare);
+  else if(c < 0) return hfindRBNode(data, tree->root->left, compare);
+  else return hfindRBNode(data, tree->root->right, compare);
 }
 
-//this function is only safe when called within the findRBNode
-bool hfindRBNode(void* data, rbNode* node, int (*compare)(void*, void*))
-{
-  if(node == NULL) return false;
-  if(c == 0) return true;
-  else if(c < 0) return hfindRBNode(data, tree->left, compare);
-  else return hfindRBNode(data, tree->right, compare);
-}

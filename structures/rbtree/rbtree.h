@@ -7,8 +7,8 @@
 #define RBTREE_H
 
 typedef char bool;
-#define true 0x5FFF
-#define false 0x0000
+#define true 0x1
+#define false 0x0
 typedef struct rbTreeNode rbNode;
 
 struct rbTreeNode
