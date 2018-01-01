@@ -50,3 +50,7 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+#Ignore stuff that is from CLion
+.idea
+CMakeLists.txt
+cmake-build-debug
