@@ -47,23 +47,23 @@ void destructRBTree(rbTree* tree)
 
 
 //this function is only safe when called within the findRBNode
-bool hfindRBNode(void* data, rbNode* node, int (*compare)(void*, void*))
+char hfindRBNode(void* data, rbNode* node, int (*compare)(void*, void*))
 {
   int c = compare(data, node->data);
-  if(!node) return false;
-  if(c == 0) return true;
+  if(!node) return 0x0;
+  if(c == 0) return 0x1;
   c = c > 0;
   return hfindRBNode(data, node->childs[c], compare);
 }
 
-bool findRBNode(void* data, rbTree* tree)
+char findRBNode(void* data, rbTree* tree)
 {
-  if(!data) return false;
-  if(!tree) return false;
-  if(!tree->compare) return false;
-  if(!tree->root) return false;
+  if(!data) return 0x0;
+  if(!tree) return 0x0;
+  if(!tree->compare) return 0x0;
+  if(!tree->root) return 0x0;
   int c = tree->compare(data, tree->root->data);
-  if(c == 0) return true;
+  if(c == 0) return 0x1;
   c = c > 0;
   return hfindRBNode(data, tree->root->childs[c], tree->compare);
 }
@@ -114,6 +114,6 @@ rbNode* insertRBNode(void* data, rbTree* tree)
 rbNode* insertReRBNode(void* data, rbNode* p, rbNode* gp, rbNode* gpp)
 {
   if(data == NULL) return NULL;
-
+  return NULL;
 }
 

@@ -6,9 +6,6 @@
 #ifndef RBTREE_H
 #define RBTREE_H
 
-typedef char bool;
-#define true 0x1
-#define false 0x0
 typedef struct rbTreeNode rbNode;
 
 struct rbTreeNode
@@ -44,7 +41,7 @@ rbNode* insertRBNode(void* data, rbTree* tree);
 rbNode* deleteRBNode(rbNode* target, rbTree* tree);
 
 //Finds a node in the tree
-bool findRBNode(void* data, rbTree* tree);
+char findRBNode(void* data, rbTree* tree);
 
 
 
