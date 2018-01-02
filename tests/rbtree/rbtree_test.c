@@ -1,14 +1,15 @@
 //
-// Created by Aditya Tewari on 1/1/18.
+// Created by AdityaAtulTewari on 1/1/18.
 //
 #include "../../structures/rbtree/rbtree.h"
-#define CATCH_CONFIG_MAIN
 #include "../catch.hpp"
+#include <stdbool.h>
 
 int c(void* v, void* d)
 {
   return *((int*) v) - *((int*) d);
 }
+
 
 TEST_CASE("Test Tree Constructor and Destructor", "[tree][construct]")
 {
@@ -20,5 +21,4 @@ TEST_CASE("Test Tree Constructor and Destructor", "[tree][construct]")
   REQUIRE(t->compare(&i, &j) == -1);
   REQUIRE_FALSE(t->root);
   destructRBTree(t);
-  REQUIRE_FALSE(t);
 }

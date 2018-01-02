@@ -31,7 +31,7 @@ void destructRBNode(rbNode* node, void (*destruct)(void*))
 rbTree* createRBTree(int (*compare)(void*, void*), void (*destruct)(void*))
 {
   if(!compare) return NULL;
-  rbTree* t = malloc(sizeof(rbTree));
+  rbTree* t = (rbTree*) malloc(sizeof(rbTree));
   t->compare = compare;
   t->destruct = destruct;
   t->root = NULL;
@@ -116,4 +116,3 @@ rbNode* insertReRBNode(void* data, rbNode* p, rbNode* gp, rbNode* gpp)
   if(data == NULL) return NULL;
   return NULL;
 }
-
