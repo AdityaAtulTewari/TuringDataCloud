@@ -13,7 +13,7 @@ int c(void* v, void* d)
 }
 
 
-TEST_CASE("Tree Decleration", "[tree][construct][destruct]")
+TEST_CASE("Tree Declaration", "[tree][construct][destruct]")
 {
   WHEN("A Tree was Defined")
   {
