@@ -12,6 +12,17 @@ rbtree:
 	#Remove object files
 	rm -rf *.o
 
+linl:
+	#Compile
+	$(CC) -c ./structures/linl/linl.c
+	#Make sure u include this on every single test using Catch
+	$(CC) -c ./tests/main.cpp
+	$(CC) -c ./tests/linl/linl_test.cpp
+	#Link into file
+	$(CC) linl.o main.o linl_test.o -o linlTest.out
+	#Remove object files
+	rm -rf *.o
+
 clean:
 	rm -rf *.o
 	rm -rf *.out
