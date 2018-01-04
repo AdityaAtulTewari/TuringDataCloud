@@ -114,5 +114,6 @@ rbNode* insertRBNode(void* data, rbTree* tree)
 rbNode* insertReRBNode(void* data, rbNode* p, rbNode* gp, rbNode* gpp)
 {
   if(data == NULL) return NULL;
+
   return NULL;
 }

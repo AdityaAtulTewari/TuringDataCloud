@@ -1,9 +1,11 @@
 //
 // Created by AdityaAtulTewari on 1/1/18.
 //
-#include "../../structures/rbtree/rbtree.h"
+
 #include "../catch.hpp"
 #include <string.h>
+#include "../../structures/rbtree/rbtree.h"
+
 
 int c(void* v, void* d)
 {
@@ -11,9 +13,9 @@ int c(void* v, void* d)
 }
 
 
-SCENARIO("Test Tree Constructor and Destructor", "[tree][construct]")
+TEST_CASE("Tree Decleration", "[tree][construct][destruct]")
 {
-  GIVEN("A Tree was Defined")
+  WHEN("A Tree was Defined")
   {
     rbTree* t = createRBTree(c, NULL);
     THEN("The the tree is checked")
@@ -31,6 +33,17 @@ SCENARIO("Test Tree Constructor and Destructor", "[tree][construct]")
     AND_THEN("Destructed")
     {
       destructRBTree(t);
+    }
+  }
+}
+
+TEST_CASE("Node Decleration", "[node][construct][destruct]")
+{
+  GIVEN("A Node was Defined")
+  {
+    WHEN("The Node Exists")
+    {
+
     }
   }
 }

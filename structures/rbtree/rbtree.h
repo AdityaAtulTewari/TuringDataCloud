@@ -5,6 +5,9 @@
 //Header Guard
 #ifndef RBTREE_H
 #define RBTREE_H
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct rbTreeNode rbNode;
 
@@ -43,7 +46,9 @@ rbNode* deleteRBNode(rbNode* target, rbTree* tree);
 //Finds a node in the tree
 char findRBNode(void* data, rbTree* tree);
 
-
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 
