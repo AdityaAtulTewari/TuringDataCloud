@@ -2,23 +2,30 @@ CC=g++
 CFLAGS=-O3
 new:
 	@while [ -z "$$REPLY" ]; do \
-		read -r -p "Type anything but Y or y to exit. [y/N]: " ; \
+		read -r -p "Enter Data Structure name or hit Ctrl+C to interrupt: " ; \
   done ; \
+	if [ -a ./structures/$$REPLY/$$REPLY.c ] ; \
+	then \
+     echo This Structure already exists; \
+		 exit 1; \
+	fi; \
 	mkdir ./structures/$$REPLY ./tests/$$REPLY; \
 	touch ./structures/$$REPLY/$$REPLY.c ./structures/$$REPLY/$$REPLY.h ; \
 	cpp=./tests/$$REPLY/$$REPLY; \
 	cpp+=_test.cpp; \
 	touch $$cpp; \
 	blah="\n$$REPLY"; \
-	blah+=':\n\t$(CC) -c ./'; \
+	blah+=':\n\t$$(CC) -c ./'; \
 	blah+="structures/$$REPLY/$$REPLY.c"; \
-	blah+='\n\t$(CC) -c ./tests/main.cpp\n\t$(CC) -c ./'; \
+	blah+='\n\t$$(CC) -c ./tests/main.cpp\n\t$$(CC) -c ./'; \
 	blah+="./tests/$$REPLY/$$REPLY_test.cpp\n\t"; \
-	blah+='$(CC)'; \
-	blah+="$$REPLY.o main.o $$REPLY_test.o -o $$REPLY"; \
+	blah+='$$(CC) '; \
+	o=$$REPLY; \
+	o+=_test.o; \
+	blah+="$$REPLY.o main.o $$o -o $$REPLY"; \
 	blah+="Test.out"; \
 	blah+="\n\trm -rf *.o"; \
-	echo $$blah >> Makefile
+	echo  $$blah >> Makefile
 
 clean:
 	rm -rf *.o
@@ -46,3 +53,4 @@ linl:
 	$(CC) linl.o main.o linl_test.o -o linlTest.out
 	#Remove object files
 	rm -rf *.o
+
