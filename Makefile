@@ -25,7 +25,16 @@ new:
 	blah+="$$REPLY.o main.o $$o -o $$REPLY"; \
 	blah+="Test.out"; \
 	blah+="\n\trm -rf *.o"; \
-	echo  $$blah >> Makefile
+	echo  $$blah >> Makefile; \
+	up=`echo $$REPLY| tr [a-z] [A-Z]`; \
+	h="//\n//\n//\n\n#ifndef $$up"; \
+	h+="_H\n#define $$up"; \
+	h+="_H\n\n#ifdef __cplusplus\nextern \"C\" {\n#endif\n\n//Code Goes Here\n\n#ifdef __cplusplus\n}\n#endif\n#endif"; \
+	echo $$h >> ./structures/$$REPLY/$$REPLY.h; \
+	c="//\n//\n//\n\n#include \"$$REPLY.h\"\n\n//Code Goes Here\n\n"; \
+	echo $$c >> ./structures/$$REPLY/$$REPLY.c; \
+	pp="//\n//\n//\n\n#include \"../catch.hpp\"\n#include \"../../structures/$$REPLY/$$REPLY.h\"\n\n//Code Goes Here\n"; \
+	echo $$pp >> $$cpp
 
 clean:
 	rm -rf *.o
@@ -53,4 +62,3 @@ linl:
 	$(CC) linl.o main.o linl_test.o -o linlTest.out
 	#Remove object files
 	rm -rf *.o
-
