@@ -35,14 +35,14 @@ new:
 	echo $$c >> ./structures/$$REPLY/$$REPLY.c; \
 	pp="//\n//\n//\n\n#include \"../catch.hpp\"\n#include \"../../structures/$$REPLY/$$REPLY.h\"\n\n//Code Goes Here\n"; \
 	echo $$pp >> $$cpp; \
-	cm="set($$up"; \
-	cm+="_TEST_FILES\n\t./tests/main.cpp\n\t./tests/catch.hpp\n\t$$cpp\n\t./structures/$$REPLY/$$REPLY.h\n\t"; \
-	cm+="./structures/$$REPLY/$$REPLY.c\n\t)\n\nadd_executable($$up $${$$up"; \
-	cm+="_TEST_FILES})"
-	if [ -a CMakeLists.txt ] ; \
-	then \
-     echo $$cm >> CMakeLists.txt; \
-	fi; \
+	cm="\n\nset($$up"; \
+	cm+="_TEST_FILES\r\n\t\t\t\t./tests/main.cpp\r\n\t\t\t\t./tests/catch.hpp\r\n\t\t\t\t$$cpp\r\n\t\t\t\t./structures/$$REPLY/$$REPLY.h\r\n\t\t\t\t"; \
+	cm+="./structures/$$REPLY/$$REPLY.c\r\n\t\t\t\t)\r\n\r\nadd_executable($$up"; \
+	cm+=' $${'; \
+	cm+="$$up"; \
+	cm+="_TEST_FILES})"; \
+    f="./CMakeLists.txt"; \
+    echo $$cm >> $$f
 
 clean:
 	rm -rf *.o
