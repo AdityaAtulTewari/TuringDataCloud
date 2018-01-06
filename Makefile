@@ -34,7 +34,15 @@ new:
 	c="//\n//\n//\n\n#include \"$$REPLY.h\"\n\n//Code Goes Here\n\n"; \
 	echo $$c >> ./structures/$$REPLY/$$REPLY.c; \
 	pp="//\n//\n//\n\n#include \"../catch.hpp\"\n#include \"../../structures/$$REPLY/$$REPLY.h\"\n\n//Code Goes Here\n"; \
-	echo $$pp >> $$cpp
+	echo $$pp >> $$cpp; \
+	cm="set($$up"; \
+	cm+="_TEST_FILES\n\t./tests/main.cpp\n\t./tests/catch.hpp\n\t$$cpp\n\t./structures/$$REPLY/$$REPLY.h\n\t"; \
+	cm+="./structures/$$REPLY/$$REPLY.c\n\t)\n\nadd_executable($$up $${$$up"; \
+	cm+="_TEST_FILES})"
+	if [ -a CMakeLists.txt ] ; \
+	then \
+     echo $$cm >> CMakeLists.txt; \
+	fi; \
 
 clean:
 	rm -rf *.o

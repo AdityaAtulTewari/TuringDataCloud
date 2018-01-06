@@ -13,37 +13,56 @@ int c(void* v, void* d)
 }
 
 
-TEST_CASE("Tree Declaration", "[tree][construct][destruct]")
+TEST_CASE("Tree Declaration", "[rbtree][tree][construct][destruct]")
 {
-  WHEN("A Tree was Defined")
+  GIVEN("A Tree is simply defined.")
   {
-    rbTree* t = createRBTree(c, NULL);
-    THEN("The the tree is checked")
+    rbTree* t;
+    t = createRBTree(c, NULL);
+    WHEN("The tree exists.")
     {
       REQUIRE(t);
-      REQUIRE(t->compare);
-      REQUIRE_FALSE(t->destruct);
-      REQUIRE_FALSE(t->root);
-    }
-    AND_THEN("The function within is checked")
-    {
-      int i = 3; int j = 4;
-      REQUIRE(t->compare(&i, &j) == -1);
-    }
-    AND_THEN("Destructed")
-    {
-      destructRBTree(t);
+      THEN("The trees components are properly defined.")
+      {
+        REQUIRE(t->compare);
+        REQUIRE_FALSE(t->destruct);
+        REQUIRE_FALSE(t->root);
+      }
+      AND_THEN("The comparator function within works and exists.")
+      {
+        int i = 3;
+        int j = 4;
+        REQUIRE(t->compare(&i, &j) == -1);
+      }
+      AND_THEN("The tree is destructed.")
+      {
+        destructRBTree(t);
+      }
     }
   }
 }
 
-TEST_CASE("Node Decleration", "[node][construct][destruct]")
+TEST_CASE("Node Declaration", "[rbtree][node][construct][destruct]")
 {
-  GIVEN("A Node was Defined")
+  GIVEN("A tree Node Pointer")
   {
-    WHEN("The Node Exists")
+    rbNode* n;
+    WHEN("The Node is defined")
     {
-
+      int i = 3;
+      n = createRBNode(&i);
+      THEN("The node is and its components were defined")
+      {
+        REQUIRE(n);
+        REQUIRE(n->data);
+        REQUIRE_FALSE(n->childs);
+        REQUIRE(n->color == 'r');
+        REQUIRE(*((int*) n->data) == 3);
+      }
+      AND_THEN("The node is destructed")
+      {
+        destructRBNode(n, NULL);
+      }
     }
   }
 }

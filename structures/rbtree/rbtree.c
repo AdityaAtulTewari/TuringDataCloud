@@ -12,18 +12,19 @@ rbNode* createRBNode(void* data)
   if(!r) return NULL;
   r->color = 'r';
   r->data = data;
-  r->childs = (rbNode**) malloc(2*sizeof(rbNode));
-  r->childs[0] = NULL;
-  r->childs[1] = NULL;
+  r->childs = NULL;
   return r;
 }
 
 void destructRBNode(rbNode* node, void (*destruct)(void*))
 {
   if(!node) return;
-  for(int i = 0; i < 2; i++) if(node->childs[i]) destructRBNode(node->childs[i], destruct);
+  if(node->childs)
+  {
+    for(int i = 0; i < 2; i++) if(node->childs[i]) destructRBNode(node->childs[i], destruct);
+    free(node->childs);
+  }
   if(destruct && node->data) destruct(node->data);
-  free(node->childs);
   free(node);
   return;
 }
