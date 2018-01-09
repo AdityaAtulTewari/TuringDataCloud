@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.8)
 
 project(TuringDataCloud)
-SET(CMAKE_C_COMPILER /usr/bin/g++)
-SET(CMAKE_CXX_COMPILER /usr/bin/g++)
+
+#Include the proper C++ compilers in the bottom two spots
+SET(CMAKE_C_COMPILER g++-7)
+SET(CMAKE_CXX_COMPILER g++-7)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_VERBOSE_MAKEFILE off)
 
@@ -31,3 +33,13 @@ set(INFARR_TEST_FILES
 
 add_executable(rbtreeTest ${RBTREE_TEST_FILES})
 add_executable(infarrTest ${INFARR_TEST_FILES})
+
+set(LINL_TEST_FILES
+				./tests/main.cpp
+				./tests/catch.hpp
+				./tests/linl/linl_test.cpp
+				./structures/linl/linl.h
+				./structures/linl/linl.c
+				)
+
+add_executable(linlTest ${LINL_TEST_FILES})

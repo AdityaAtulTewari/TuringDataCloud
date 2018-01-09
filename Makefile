@@ -1,4 +1,5 @@
-CC=g++
+#change this line depending on where your compiler is
+CC=g++-7
 CFLAGS=-O3
 new:
 	@while [ -z "$$REPLY" ]; do \

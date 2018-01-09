@@ -3,9 +3,9 @@
 //
 
 #include "../catch.hpp"
-#include <string.h>
 #include "../../structures/rbtree/rbtree.h"
 
+//additional libraries
 
 int c(void* v, void* d)
 {
@@ -40,20 +40,36 @@ TEST_CASE("Tree Declaration", "[rbtree][tree][construct][destruct]")
       }
     }
   }
+  GIVEN("A NULL comparator into tree declaration.")
+  {
+    rbTree* t;
+    t = createRBTree(NULL, NULL);
+    WHEN("The tree is checked.")
+    {
+      THEN("The tree pointer has a NULL value.")
+      {
+        REQUIRE_FALSE(t);
+      }
+      AND_THEN("Try and destruct the point.")
+      {
+        destructRBTree(t);
+      }
+    }
+  }
 }
 
 TEST_CASE("Node Declaration", "[rbtree][node][construct][destruct]")
 {
-  GIVEN("A tree Node Pointer")
+  GIVEN("A simply defined tree Node Pointer.")
   {
     rbNode* n;
-    WHEN("The Node is defined")
+    int i = 3;
+    n = createRBNode(&i);
+    WHEN("The the node exists.")
     {
-      int i = 3;
-      n = createRBNode(&i);
-      THEN("The node is and its components were defined")
+      REQUIRE(n);
+      THEN("The node's components are checked")
       {
-        REQUIRE(n);
         REQUIRE(n->data);
         REQUIRE_FALSE(n->childs);
         REQUIRE(n->color == 'r');
@@ -65,4 +81,21 @@ TEST_CASE("Node Declaration", "[rbtree][node][construct][destruct]")
       }
     }
   }
+  GIVEN("A NULL pointer for data")
+  {
+    rbNode* n = createRBNode(NULL);
+    WHEN("The node is checked.")
+    {
+      THEN("The node pointer has a NULL value.")
+      {
+        REQUIRE_FALSE(n);
+      }
+      AND_THEN("The node is destructed.")
+      {
+        destructRBNode(n, NULL);
+        free(n);
+      }
+    }
+  }
+
 }
