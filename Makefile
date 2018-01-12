@@ -1,5 +1,5 @@
 #change this line depending on where your compiler is
-CC=g++-7
+CC=g++
 CFLAGS=-O3
 new:
 	@while [ -z "$$REPLY" ]; do \
@@ -57,7 +57,7 @@ rbtree:
 	$(CC) -c ./tests/main.cpp
 	$(CC) -c ./tests/rbtree/rbtree_test.cpp
 	#Link into file
-	$(CC) rbtree.o main.o rbtree_test.o -o rbtreeTest.out
+	$(CC) -lmcheck rbtree.o main.o rbtree_test.o -o rbtreeTest.out
 	#Remove object files
 	rm -rf *.o
 

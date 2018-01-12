@@ -22,7 +22,6 @@ void destructRBNode(rbNode* node, void (*destruct)(void*))
   if(node->childs)
   {
     for(int i = 0; i < 2; i++) if(node->childs[i]) destructRBNode(node->childs[i], destruct);
-    free(node->childs);
   }
   if(destruct && node->data) destruct(node->data);
   free(node);

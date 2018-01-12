@@ -6,6 +6,8 @@
 #include "../../structures/rbtree/rbtree.h"
 
 //additional libraries
+#include <mcheck.h>
+#include <stdio.h>
 
 int c(void* v, void* d)
 {
@@ -34,9 +36,14 @@ TEST_CASE("Tree Declaration", "[rbtree][tree][construct][destruct]")
         int j = 4;
         REQUIRE(t->compare(&i, &j) == -1);
       }
+      AND_THEN("The pointer is checkd to see if it is okay.")
+      {
+        REQUIRE(mprobe(t) == MCHECK_OK);
+      }
       AND_THEN("The tree is destructed.")
       {
         destructRBTree(t);
+        REQUIRE(mprobe(t) == MCHECK_FREE);
       }
     }
   }
